@@ -9,7 +9,7 @@ import styles from './Post.module.css';
 
 export function Post({ author, content, publishedAt }) {
     const [comments, setComments] = useState(['Good!']);
-    const [newCommentText, setNewCommentSet] = useState('');
+    const [newCommentText, setNewCommentSet] = useState("");
 
     const publishedDateFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
         locale: ptBR
@@ -24,13 +24,27 @@ export function Post({ author, content, publishedAt }) {
         event.preventDefault();
 
         setComments([...comments, newCommentText]);
-        setNewCommentSet('');
+        setNewCommentSet("");
     }
 
-   
     function handleNewCommentChange() {
+        event.target.setCustomValidity("");
         setNewCommentSet(event.target.value);
     }
+
+    function deleteComment(commentToDelete) {
+        const commentsWithoutDeledOne = comments.filter((comment) => {
+            return comment !== commentToDelete;
+        });
+        
+        setComments(commentsWithoutDeledOne);
+    }
+
+    function handleNewCommentInvalid() {
+        event.target.setCustomValidity("Esse campo é obrigatório!")
+    }
+
+    const isNewCommentEmpty = newCommentText.length === 0;
 
     return (
         <article className={styles.post}>
@@ -69,16 +83,24 @@ export function Post({ author, content, publishedAt }) {
                     placeholder="Deixe um comentário"
                     value={newCommentText}
                     onChange={handleNewCommentChange}
+                    onInvalid={handleNewCommentInvalid}
+                    required
                 />
 
                 <footer>
-                    <button type="submit">Publicar</button>
+                    <button type="submit" disabled={isNewCommentEmpty}>
+                        Publicar
+                    </button>
                 </footer>
             </form>
 
             <div className={styles.commentList}>
                 {comments.map((comment) => (
-                    <Comment key={comment} content={comment} />
+                    <Comment
+                        key={comment}
+                        content={comment}
+                        onDeleteComment={deleteComment}
+                    />
                 )) }
             </div>
         </article>
