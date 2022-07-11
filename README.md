@@ -13,7 +13,7 @@
 
 ## :speech_balloon: Sobre <a name="about"></a>
 
-> #
+> [Feed](https://feed-lyart.vercel.app/) é uma breve aplicação de uma fictícia rede social. Usado para fixação de conceitos fundamentais do React e para criar a primeira aplicação usando Vite.
 
 <br />
 <table>
@@ -37,10 +37,11 @@ $ npm run dev
 
 ## :triangular_flag_on_post: Desafio <a name="challenge"></a>
 
-> #
+> Fixação dos principais conceitos envolvendo a tecnologia React.
 
 ## :heavy_check_mark: Tecnologias <a name="technologies"></a>
 
+-   [Vite](https://vitejs.dev/guide/)
 -   [React](https://pt-br.reactjs.org/)
 -   [TypeScript](https://www.typescriptlang.org/)
 
